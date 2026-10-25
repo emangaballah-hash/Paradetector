@@ -7,7 +7,7 @@ from PIL import Image
 # تحميل النموذج
 @st.cache_resource
 def load_model():
-    return YOLO("parasite_yolo_best.pt")
+    return YOLO("best.pt")
 
 model = load_model()
 class_names = {0: 'Giardia', 1: 'Amoeba', 2: 'Ascaris'}
