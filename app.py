@@ -5,6 +5,7 @@ from ultralytics import YOLO
 import cv2
 import numpy as np
 from PIL import Image
+st.set_page_config(page_title="ParaSherlock App", page_icon="🦠")
 
 # تحميل النموذج من Google Drive تلقائياً
 @st.cache_resource
