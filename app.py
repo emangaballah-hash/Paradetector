@@ -20,7 +20,7 @@ def load_model():
 model = load_model()
 class_names = {0: 'Giardia', 1: 'Amoeba', 2: 'Ascaris'}
 
-st.title("🦠 AI Parasite Detector")
+st.title("🦠 ParaSherlock: AI Parasite Diagnostic")
 st.write("ارفعي صورة مسحة برازية، وسيقوم الذكاء الاصطناعي بالكشف عن الطفيليات وتقدير شدة العدوى.")
 
 uploaded_file = st.file_uploader("ارفعي صورة المسحة هنا", type=["jpg", "jpeg", "png"])
