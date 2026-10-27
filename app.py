@@ -3,8 +3,13 @@ from ultralytics import YOLO
 import cv2
 import numpy as np
 from PIL import Image
+import torch
+import ultralytics
 
-# تحميل النموذج
+
+# إصلاح مشكلة تحميل النموذج مع إصدارات PyTorch الحديثة
+torch.serialization.add_safe_globals([ultralytics.nn.tasks.DetectionModel])
+
 @st.cache_resource
 def load_model():
     return YOLO("best.pt")
