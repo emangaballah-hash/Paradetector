@@ -1,18 +1,20 @@
 import streamlit as st
+import gdown
+import os
 from ultralytics import YOLO
 import cv2
 import numpy as np
 from PIL import Image
-import torch
-import ultralytics
 
-
-# إصلاح مشكلة تحميل النموذج مع إصدارات PyTorch الحديثة
-torch.serialization.add_safe_globals([ultralytics.nn.tasks.DetectionModel])
-
+# تحميل النموذج من Google Drive تلقائياً
 @st.cache_resource
 def load_model():
-    return YOLO("best.pt")
+    file_id = "1kE10xBaywLF7nZolKJSdOT1_OO4gkEP1" 
+    url = f"https://drive.google.com/uc?id={file_id}"
+    output = "best.pt"
+    if not os.path.exists(output):
+        gdown.download(url, output, quiet=False)
+    return YOLO(output)
 
 model = load_model()
 class_names = {0: 'Giardia', 1: 'Amoeba', 2: 'Ascaris'}
@@ -21,7 +23,7 @@ st.title("🦠 AI Parasite Detector")
 st.write("ارفعي صورة مسحة برازية، وسيقوم الذكاء الاصطناعي بالكشف عن الطفيليات وتقدير شدة العدوى.")
 
 uploaded_file = st.file_uploader("ارفعي صورة المسحة هنا", type=["jpg", "jpeg", "png"])
-conf_threshold = st.slider("حساسية الكشف (Confidence)", min_value=0.1, max_value=0.9, value=0.25, step=0.05)
+conf_threshold = st.slider("حساسية الكشف", min_value=0.1, max_value=0.9, value=0.25, step=0.05)
 
 if uploaded_file is not None:
     image = Image.open(uploaded_file).convert("RGB")
@@ -51,4 +53,4 @@ if uploaded_file is not None:
             
             res_plotted = result.plot()
             res_rgb = cv2.cvtColor(res_plotted, cv2.COLOR_BGR2RGB)
-            st.image(res_rgb, caption="النتيجة (الصناديق المحيطة)", use_column_width=True)
+            st.image(res_rgb, caption="النتيجة", use_column_width=True)
