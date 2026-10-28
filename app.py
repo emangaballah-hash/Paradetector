@@ -30,7 +30,7 @@ class_names = {0: 'Giardia', 1: 'Amoeba', 2: 'Ascaris'}
 # ============================================================
 # 3. User Interface
 # ============================================================
-st.title("🕵️‍♀️ ParaSherlock: AI Parasite Detective")
+st.title("🕵️‍♀️ ParaSherlock: Digital Parasite Detective")
 st.markdown("""
 **Welcome to ParaSherlock.** Upload a stool smear image for automated detection and intensity estimation of intestinal parasites.
 """)
